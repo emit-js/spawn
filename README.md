@@ -23,7 +23,7 @@ require("@dot-event/spawn")(dot)
 await dot.spawn("test", {
   args: ["hi"],
   command: "echo",
-  store: true,
+  save: true,
 })
 ```
 

@@ -7,7 +7,7 @@ test("spawn command", async () => {
   await dot.spawn("test", {
     args: ["hi"],
     command: "echo",
-    store: true,
+    save: true,
   })
 
   expect(dot.get("test")).toMatchObject({
@@ -29,7 +29,7 @@ test("spawn command with options", async () => {
   await dot.spawn("test", {
     command: "pwd",
     cwd: "/",
-    store: true,
+    save: true,
   })
 
   expect(dot.get("test")).toMatchObject({
