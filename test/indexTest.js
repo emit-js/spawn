@@ -11,12 +11,9 @@ test("spawn command", async () => {
   })
 
   expect(dot.get("test")).toMatchObject({
-    args: ["hi"],
     code: 0,
-    command: "echo",
     out: "hi\r\n",
     signal: 0,
-    silent: true,
   })
 })
 
@@ -34,10 +31,7 @@ test("spawn command with options", async () => {
 
   expect(dot.get("test")).toMatchObject({
     code: 0,
-    command: "pwd",
-    cwd: "/",
     out: "/\r\n",
     signal: 0,
-    silent: true,
   })
 })
