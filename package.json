@@ -31,7 +31,7 @@
     "@babel/preset-env": "7.2.3",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.1",
-    "dot-event": "3.0.32",
+    "dot-event": "3.0.33",
     "@dot-event/log": "1.0.13",
     "@dot-event/store": "7.0.12",
     "eslint": "5.13.0",
