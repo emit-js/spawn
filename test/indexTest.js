@@ -1,8 +1,16 @@
-test("spawn command", async () => {
+function newDot() {
   const dot = require("dot-event")()
+
+  require("@dot-event/alias")(dot)
   require("@dot-event/log")(dot)
   require("@dot-event/store")(dot)
   require("../")(dot)
+
+  return dot
+}
+
+test("spawn command", async () => {
+  const dot = newDot()
 
   await dot.spawn("test", {
     args: ["hi"],
@@ -18,10 +26,7 @@ test("spawn command", async () => {
 })
 
 test("spawn command with options", async () => {
-  const dot = require("dot-event")()
-  require("@dot-event/log")(dot)
-  require("@dot-event/store")(dot)
-  require("../")(dot)
+  const dot = newDot()
 
   await dot.spawn("test", {
     command: "pwd",
