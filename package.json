@@ -14,8 +14,15 @@
   },
   "license": "MIT",
   "homepage": "https://github.com/dot-event/spawn#readme",
-  "bin": {
-    "dot-spawn": "./bin/dot-spawn"
+  "main": "dist/spawn.js",
+  "scripts": {
+    "build": "babel lib --out-dir dist --source-maps",
+    "prepublishOnly": "rimraf dist; npm run build",
+    "watch": "rimraf dist; babel lib --watch --out-dir dist --source-maps",
+    "fix": "npm run lint -- --fix",
+    "lint": "eslint --ignore-path .gitignore --ext=js .",
+    "pretty": "prettier --write **/*.css **/*.json **/*.md",
+    "test": "jest"
   },
   "dependencies": {
     "@babel/runtime": "7.2.0",
@@ -33,7 +40,7 @@
     "@dot-event/store": "7.0.12",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.1",
-    "dot-event": "3.0.33",
+    "dot-event": "3.1.0",
     "eslint": "5.13.0",
     "eslint-config-prettier": "4.0.0",
     "eslint-plugin-prettier": "3.0.1",
@@ -44,27 +51,14 @@
     "prettier": "1.16.4",
     "rimraf": "2.6.2"
   },
-  "operations": {
-    "watchman": {
-      "triggers": [
-        {
-          "name": "babel",
-          "expression": [
-            "anyof",
-            [
-              "match",
-              "lib/**/*.js",
-              "wholename"
-            ]
-          ],
-          "command": [
-            "npm",
-            "run",
-            "build"
-          ]
-        }
-      ]
-    }
+  "dot": {
+    "dependencies": [
+      "@dot-event/alias",
+      "@dot-event/store"
+    ],
+    "supportedDependencies": [
+      "@dot-event/log"
+    ]
   },
   "babel": {
     "presets": [
@@ -82,16 +76,6 @@
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-transform-runtime"
     ]
-  },
-  "main": "dist/spawn.js",
-  "scripts": {
-    "build": "babel lib --out-dir dist --source-maps",
-    "prepublishOnly": "rimraf dist; npm run build",
-    "watch": "rimraf dist; babel lib --watch --out-dir dist --source-maps",
-    "fix": "npm run lint -- --fix",
-    "lint": "eslint --ignore-path .gitignore --ext=js .",
-    "pretty": "prettier --write **/*.css **/*.json **/*.md",
-    "test": "jest"
   },
   "eslintConfig": {
     "env": {
@@ -201,24 +185,22 @@
     ],
     "testEnvironment": "node"
   },
-  "watchman": {
-    "triggers": [
-      {
-        "name": "babel",
-        "expression": [
-          "anyof",
-          [
-            "match",
-            "lib/**/*.js",
-            "wholename"
-          ]
-        ],
-        "command": [
-          "npm",
-          "run",
-          "build"
+  "watchman": [
+    {
+      "name": "babel",
+      "expression": [
+        "anyof",
+        [
+          "match",
+          "lib/**/*.js",
+          "wholename"
         ]
-      }
-    ]
-  }
+      ],
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ]
+    }
+  ]
 }
