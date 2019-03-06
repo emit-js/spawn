@@ -51,15 +51,6 @@
     "prettier": "1.16.4",
     "rimraf": "2.6.2"
   },
-  "dot": {
-    "dependencies": [
-      "@dot-event/alias",
-      "@dot-event/store"
-    ],
-    "supportedDependencies": [
-      "@dot-event/log"
-    ]
-  },
   "babel": {
     "presets": [
       [
