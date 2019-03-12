@@ -16,7 +16,7 @@
   "homepage": "https://github.com/dot-event/spawn#readme",
   "main": "dist/spawn.js",
   "scripts": {
-    "build": "babel lib --out-dir dist --source-maps",
+    "build": "rm -rf dist; babel lib --out-dir dist --source-maps",
     "prepublishOnly": "rimraf dist; npm run build",
     "watch": "rimraf dist; babel lib --watch --out-dir dist --source-maps",
     "fix": "npm run lint -- --fix",
