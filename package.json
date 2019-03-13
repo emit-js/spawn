@@ -1,6 +1,6 @@
 {
   "name": "@dot-event/spawn",
-  "version": "3.0.16",
+  "version": "3.0.17",
   "description": "dot-event process spawn operation",
   "keywords": [
     "dot-event",
@@ -35,9 +35,9 @@
     "@babel/plugin-proposal-object-rest-spread": "7.3.4",
     "@babel/plugin-transform-runtime": "7.3.4",
     "@babel/preset-env": "7.3.4",
-    "@dot-event/alias": "0.0.8",
-    "@dot-event/log": "1.0.27",
-    "@dot-event/store": "7.0.15",
+    "@dot-event/alias": "0.0.9",
+    "@dot-event/log": "1.0.28",
+    "@dot-event/store": "7.0.16",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.1",
     "dot-event": "3.1.3",
