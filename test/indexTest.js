@@ -20,6 +20,7 @@ test("spawn command", async () => {
 
   expect(dot.get("test")).toMatchObject({
     code: 0,
+    err: false,
     out: "hi\r\n",
     signal: 0,
   })
@@ -36,6 +37,7 @@ test("spawn command with options", async () => {
 
   expect(dot.get("test")).toMatchObject({
     code: 0,
+    err: false,
     out: "/\r\n",
     signal: 0,
   })
