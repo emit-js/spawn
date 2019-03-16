@@ -1,7 +1,7 @@
 function newDot() {
   const dot = require("dot-event")()
 
-  require("@dot-event/alias")(dot)
+  require("@dot-event/args")(dot)
   require("@dot-event/log")(dot)
   require("@dot-event/store")(dot)
   require("../")(dot)
