@@ -1,7 +1,15 @@
 import { spawn } from "node-pty"
 
-export function terminal(opts) {
-  const options = defaultOptions(opts)
+module.exports = function(dot) {
+  if (dot.spawnTerminal) {
+    return
+  }
+
+  dot.any("spawnTerminal", spawnTerminal)
+}
+
+function spawnTerminal(prop, arg) {
+  const options = defaultOptions(arg)
   const cols = process.stdout.columns
   const rows = process.stdout.rows
 

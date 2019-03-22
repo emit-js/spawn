@@ -1,8 +1,9 @@
 function newDot() {
   const dot = require("dot-event")()
 
-  require("@dot-event/args")(dot)
   require("@dot-event/log")(dot)
+  require("@dot-event/args")(dot)
+  require("@dot-event/glob")(dot)
   require("@dot-event/store")(dot)
   require("../")(dot)
 
@@ -31,14 +32,13 @@ test("spawn command with options", async () => {
 
   await dot.spawn("test", {
     command: "pwd",
-    cwd: "/",
     save: true,
   })
 
   expect(dot.get("test")).toMatchObject({
     code: 0,
     err: false,
-    out: "/\r\n",
+    out: `${process.cwd()}\r\n`,
     signal: 0,
   })
 })

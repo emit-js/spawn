@@ -1,35 +1,23 @@
-// Helpers
-import { terminal } from "./spawn/terminal"
-
 module.exports = function(dot) {
-  if (dot.spawn) {
+  if (dot.spawnPath) {
     return
   }
 
-  dot("dependencies", "spawn", {
-    arg: ["@dot-event/args", "@dot-event/store"],
-  })
-
-  dot("args", "spawn", {
-    args: { alias: "a" },
-    command: { alias: "c" },
-    exit: { alias: "e" },
-    log: { alias: "l" },
-    quiet: { alias: "q" },
-    save: { alias: "s" },
-  })
-
-  dot.any("spawn", spawn)
+  dot.any("spawnPath", spawnPath)
 }
 
-async function spawn(prop, arg, dot, e, signal) {
-  const { args, cwd, exit, json, quiet, save } = arg
+async function spawnPath(prop, arg, dot, e, signal) {
+  const { args, exit, json, path, quiet, save } = arg
 
-  const out = await run({
-    args: fixArgs(args),
-    command: arg.command,
-    cwd: cwd,
-  })
+  const out = await run(
+    prop,
+    {
+      args: fixArgs(args),
+      command: arg.command,
+      cwd: path,
+    },
+    dot
+  )
 
   out.err = out.code > 0
 
@@ -72,8 +60,8 @@ function fixArgs(args) {
   return typeof args === "string" ? [args] : args
 }
 
-async function run(options) {
-  const { pty, options: opts } = terminal(options)
+async function run(prop, args, dot) {
+  const { pty, options: opts } = dot.spawnTerminal(args)
 
   return new Promise((resolve, reject) => {
     pty.on("exit", (code, signal) =>
