@@ -16,7 +16,10 @@ module.exports = function(dot) {
     command: { alias: "c" },
     exit: { alias: "e" },
     log: { alias: "l" },
-    paths: { alias: ["_", "p"], default: [process.cwd()] },
+    paths: {
+      alias: ["_", "cwd", "p"],
+      default: [process.cwd()],
+    },
     quiet: { alias: "q" },
     save: { alias: "s" },
   })
@@ -30,19 +33,33 @@ module.exports = function(dot) {
 async function spawn(prop, arg, dot) {
   const paths = await dot.glob(prop, {
     absolute: true,
-    pattern:
-      arg.paths.length === 1
-        ? arg.paths[0]
-        : "{" + arg.paths.join(",") + "}",
+    pattern: pathsToPattern(arg.paths),
   })
 
-  return Promise.all(
-    paths.map(
-      async path =>
-        await dot.spawnPath(prop, {
-          ...arg,
-          path,
-        })
+  if (paths.length > 1) {
+    return Promise.all(
+      paths.map(
+        async path =>
+          await dot.spawnPath(prop, {
+            ...arg,
+            path,
+          })
+      )
     )
-  )
+  } else {
+    return await dot.spawnPath(prop, {
+      ...arg,
+      path: paths[0],
+    })
+  }
+}
+
+function pathsToPattern(paths) {
+  if (typeof paths === "string") {
+    return paths
+  } else if (paths.length === 1) {
+    return paths[0]
+  } else {
+    return "{" + paths.join(",") + "}"
+  }
 }
