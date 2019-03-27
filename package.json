@@ -1,6 +1,6 @@
 {
   "name": "@dot-event/spawn",
-  "version": "3.0.22",
+  "version": "3.0.23",
   "description": "dot-event process spawn operation",
   "keywords": [
     "dot-event",
@@ -36,7 +36,7 @@
     "@babel/plugin-transform-runtime": "7.3.4",
     "@babel/preset-env": "7.3.4",
     "@dot-event/args": "1.0.3",
-    "@dot-event/glob": "0.0.7",
+    "@dot-event/glob": "0.0.8",
     "@dot-event/log": "1.0.33",
     "@dot-event/store": "7.0.17",
     "babel-core": "7.0.0-bridge.0",
