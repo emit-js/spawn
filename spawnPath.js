@@ -8,11 +8,12 @@ module.exports = function(dot) {
 
 async function spawnPath(prop, arg, dot, e, signal) {
   const { args, exit, json, path, quiet, save } = arg
+  const argsArr = fixArgs(args)
 
   const out = await run(
     prop,
     {
-      args: fixArgs(args),
+      args: argsArr,
       command: arg.command,
       cwd: path,
     },
@@ -30,12 +31,17 @@ async function spawnPath(prop, arg, dot, e, signal) {
 
     dot("spawnOutput", prop, {
       level,
-      message: "exit code: " + out.code,
+      message: `command: ${argsArr.join(" ")}`,
     })
 
     dot("spawnOutput", prop, {
       level,
-      message: "output:\n" + out.out,
+      message: `exit code: ${out.code}`,
+    })
+
+    dot("spawnOutput", prop, {
+      level,
+      message: `output:\n${out.out}`,
     })
   }
 
