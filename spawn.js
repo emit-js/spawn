@@ -33,7 +33,7 @@ module.exports = function(dot) {
 async function spawn(prop, arg, dot) {
   const paths = await dot.glob(prop, {
     absolute: true,
-    pattern: pathsToPattern(arg.paths),
+    pattern: arg.paths,
   })
 
   if (paths.length > 1) {
@@ -51,15 +51,5 @@ async function spawn(prop, arg, dot) {
       ...arg,
       path: paths[0],
     })
-  }
-}
-
-function pathsToPattern(paths) {
-  if (typeof paths === "string") {
-    return paths
-  } else if (paths.length === 1) {
-    return paths[0]
-  } else {
-    return "{" + paths.join(",") + "}"
   }
 }
