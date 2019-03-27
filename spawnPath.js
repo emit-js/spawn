@@ -27,22 +27,19 @@ async function spawnPath(prop, arg, dot, e, signal) {
   }
 
   if (!quiet) {
-    const level = out.err ? "warn" : "info"
+    const level = out.err ? "warn" : "info",
+      messages = [
+        `command: ${arg.command}${
+          argsArr ? " " + argsArr.join(" ") : ""
+        }`,
+        `cwd: ${path}`,
+        `code: ${out.code}`,
+        `output:\n${out.out}`,
+      ]
 
-    dot("spawnOutput", prop, {
-      level,
-      message: `command: ${argsArr.join(" ")}`,
-    })
-
-    dot("spawnOutput", prop, {
-      level,
-      message: `exit code: ${out.code}`,
-    })
-
-    dot("spawnOutput", prop, {
-      level,
-      message: `output:\n${out.out}`,
-    })
+    for (const message of messages) {
+      dot("spawnOutput", prop, { level, message })
+    }
   }
 
   if (out.err) {
