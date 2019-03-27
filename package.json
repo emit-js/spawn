@@ -36,7 +36,7 @@
     "@babel/plugin-transform-runtime": "7.3.4",
     "@babel/preset-env": "7.3.4",
     "@dot-event/args": "1.0.3",
-    "@dot-event/glob": "0.0.6",
+    "@dot-event/glob": "0.0.7",
     "@dot-event/log": "1.0.32",
     "@dot-event/store": "7.0.17",
     "babel-core": "7.0.0-bridge.0",
