@@ -7,7 +7,7 @@
     "operation",
     "spawn"
   ],
-  "author": "emit <oss@emit-js.com>",
+  "author": "emit <emit@emit-js.com>",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/emit-js/spawn.git"
