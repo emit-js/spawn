@@ -3,7 +3,7 @@
   "version": "3.0.26",
   "description": "emit process spawn",
   "keywords": [
-    "@emit-js/emit",
+    "emit",
     "operation",
     "spawn"
   ],
