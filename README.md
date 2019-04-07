@@ -1,26 +1,26 @@
-# @dot-event/spawn
+# @emit-js/spawn
 
-[dot-event](https://github.com/dot-event/dot-event#readme) process spawn
+[emit](https://github.com/emit-js/emit#readme) process spawn
 
 ![spawn](spawn.gif)
 
 ## Install
 
 ```bash
-npm install dot-event @dot-event/spawn
+npm install @emit-js/emit @emit-js/spawn
 ```
 
 ## Setup
 
 ```js
-const dot = require("dot-event")()
-require("@dot-event/spawn")(dot)
+const emit = require("@emit-js/emit")()
+require("@emit-js/spawn")(emit)
 ```
 
 ## Usage
 
 ```js
-await dot.spawn("test", {
+await emit.spawn("test", {
   args: ["hi"],
   command: "echo",
   save: true,
@@ -29,8 +29,8 @@ await dot.spawn("test", {
 
 ## Options
 
-| Option    | Description                                                       |
-| --------- | ----------------------------------------------------------------- |
-| `args`    | Array of command arguments                                        |
-| `command` | Command to spawn                                                  |
-| `save`    | Save output to [store](https://github.com/dot-event/store#readme) |
+| Option    | Description                                                     |
+| --------- | --------------------------------------------------------------- |
+| `args`    | Array of command arguments                                      |
+| `command` | Command to spawn                                                |
+| `save`    | Save output to [store](https://github.com/emit-js/store#readme) |

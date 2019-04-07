@@ -1,14 +1,14 @@
 import { spawn } from "node-pty"
 
-module.exports = function(dot) {
-  if (dot.spawnTerminal) {
+module.exports = function(emit) {
+  if (emit.spawnTerminal) {
     return
   }
 
-  dot.any("spawnTerminal", spawnTerminal)
+  emit.any("spawnTerminal", spawnTerminal)
 }
 
-function spawnTerminal(prop, arg) {
+function spawnTerminal(arg) {
   const options = defaultOptions(arg)
   const cols = process.stdout.columns
   const rows = process.stdout.rows

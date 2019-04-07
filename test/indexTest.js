@@ -1,25 +1,25 @@
 function newDot() {
-  const dot = require("dot-event")()
+  const emit = require("@emit-js/emit")()
 
-  require("@dot-event/log")(dot)
-  require("@dot-event/args")(dot)
-  require("@dot-event/glob")(dot)
-  require("@dot-event/store")(dot)
-  require("../")(dot)
+  require("@emit-js/log")(emit)
+  require("@emit-js/args")(emit)
+  require("@emit-js/glob")(emit)
+  require("@emit-js/store")(emit)
+  require("../")(emit)
 
-  return dot
+  return emit
 }
 
 test("spawn command", async () => {
-  const dot = newDot()
+  const emit = newDot()
 
-  await dot.spawn("test", {
+  await emit.spawn("test", {
     args: ["hi"],
     command: "echo",
     save: true,
   })
 
-  expect(dot.get("test")).toMatchObject({
+  expect(emit.get("test")).toMatchObject({
     code: 0,
     err: false,
     out: "hi\r\n",
@@ -28,14 +28,14 @@ test("spawn command", async () => {
 })
 
 test("spawn command with options", async () => {
-  const dot = newDot()
+  const emit = newDot()
 
-  await dot.spawn("test", {
+  await emit.spawn("test", {
     command: "pwd",
     save: true,
   })
 
-  expect(dot.get("test")).toMatchObject({
+  expect(emit.get("test")).toMatchObject({
     code: 0,
     err: false,
     out: `${process.cwd()}\r\n`,

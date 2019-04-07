@@ -1,17 +1,15 @@
-module.exports = function(dot) {
-  if (dot.spawn) {
+module.exports = function(emit) {
+  if (emit.spawn) {
     return
   }
 
-  dot("dependencies", "spawn", {
-    arg: [
-      "@dot-event/args",
-      "@dot-event/glob",
-      "@dot-event/store",
-    ],
-  })
+  emit("dependencies", "spawn", [
+    "@emit-js/args",
+    "@emit-js/glob",
+    "@emit-js/store",
+  ])
 
-  dot("args", "spawn", {
+  emit("args", "spawn", {
     args: { alias: "a" },
     command: { alias: "c" },
     exit: { alias: "e" },
@@ -24,14 +22,14 @@ module.exports = function(dot) {
     save: { alias: "s" },
   })
 
-  require("./spawnPath")(dot)
-  require("./spawnTerminal")(dot)
+  require("./spawnPath")(emit)
+  require("./spawnTerminal")(emit)
 
-  dot.any("spawn", spawn)
+  emit.any("spawn", spawn)
 }
 
-async function spawn(prop, arg, dot) {
-  const paths = await dot.glob(prop, {
+async function spawn(arg, prop, emit) {
+  const paths = await emit.glob(prop, {
     absolute: true,
     pattern: arg.paths,
   })
@@ -40,14 +38,14 @@ async function spawn(prop, arg, dot) {
     return Promise.all(
       paths.map(
         async path =>
-          await dot.spawnPath(prop, {
+          await emit.spawnPath(prop, {
             ...arg,
             path,
           })
       )
     )
   } else {
-    return await dot.spawnPath(prop, {
+    return await emit.spawnPath(prop, {
       ...arg,
       path: paths[0],
     })

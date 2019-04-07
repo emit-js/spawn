@@ -1,23 +1,23 @@
-module.exports = function(dot) {
-  if (dot.spawnPath) {
+module.exports = function(emit) {
+  if (emit.spawnPath) {
     return
   }
 
-  dot.any("spawnPath", spawnPath)
+  emit.any("spawnPath", spawnPath)
 }
 
-async function spawnPath(prop, arg, dot, e, signal) {
+async function spawnPath(arg, prop, emit, signal) {
   const { args, exit, json, path, quiet, save } = arg
   const argsArr = fixArgs(args)
 
   const out = await run(
-    prop,
     {
       args: argsArr,
       command: arg.command,
       cwd: path,
     },
-    dot
+    prop,
+    emit
   )
 
   out.err = out.code > 0
@@ -38,7 +38,7 @@ async function spawnPath(prop, arg, dot, e, signal) {
       ]
 
     for (const message of messages) {
-      dot("spawnOutput", prop, { level, message })
+      emit("spawnOutput", prop, { level, message })
     }
   }
 
@@ -52,8 +52,8 @@ async function spawnPath(prop, arg, dot, e, signal) {
     }
   }
 
-  if (dot.set && save) {
-    await dot.set(prop, out)
+  if (emit.set && save) {
+    await emit.set(prop, out)
   }
 
   return out
@@ -63,8 +63,8 @@ function fixArgs(args) {
   return typeof args === "string" ? [args] : args
 }
 
-async function run(prop, args, dot) {
-  const { pty, options: opts } = dot.spawnTerminal(args)
+async function run(arg, prop, emit) {
+  const { pty, options: opts } = emit.spawnTerminal(arg)
 
   return new Promise((resolve, reject) => {
     pty.on("exit", (code, signal) =>
